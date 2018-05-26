@@ -4,7 +4,7 @@ t_map	*new_map(void)
 {
 	t_map *map;
 
-	if ((map = (t_map *)malloc(t_map)))
+	if ((map = (t_map *)malloc(sizeof(t_map))))
 	{
 		map->x = 0;
 		map->y = 0;

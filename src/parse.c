@@ -1,6 +1,6 @@
 #include "../fdf.h"
 
-t_list	*get_file(char *filename)
+static t_list	*get_file(char *filename)
 {
 	t_list	*file;
 	char	*str;
@@ -17,10 +17,75 @@ t_list	*get_file(char *filename)
 	return (file);
 }
 
-t_map	*get_map(char *filename)
+static int		count_numbers(char *str)
+{
+	int		count;
+
+	count = 0;
+	while (*str)
+	{
+		if (ft_isdigit(*str))
+		{
+			count++;
+			while (ft_isdigit(*str))
+				str++;
+		}
+		str++;
+	}
+	return (count);
+}
+
+static int		*get_intarr(char *str, int len)
+{
+	int		*res;
+	int		i;
+
+	i = 0;
+	if ((res = (int *)malloc(sizeof(int) * len)))
+	{
+		while (i < len)
+		{
+			res[i] = ft_atoi(str);
+			while (ft_isdigit(*str))
+				str++;
+			i++;
+		}
+	}
+	return (res);
+}
+
+static void		fill_map(t_list *file, t_map *map)
+{
+	t_list	*lst;
+	int 	i;
+
+	map->y = ft_lstlen(file);
+	map->x = count_numbers((char *)file->content);
+	if ((map->map = (int **)malloc(sizeof(int *))))
+	{
+		lst = file;
+		i = 0;
+		while (lst && i < map->x)
+		{
+			map->map[i] = get_intarr((char *)lst->content, map->x);
+			i++;
+			lst = lst->next;
+		}
+	}
+}
+
+t_map			*get_map(char *filename)
 {
 	t_list	*file;
+	t_map	*map;
 
-	file = get_file(filename);
-	ft_lstdel(&file, &ft_memclr);
+	if ((map = new_map()))
+	{
+		if ((file = get_file(filename)))
+		{
+			fill_map(file, map);
+			ft_lstdel(&file, &ft_memclr);
+		}
+	}
+	return (map);
 }

@@ -19,4 +19,9 @@ typedef struct		s_map
 t_map				*new_map(void);
 void				clear_map(t_map **map);
 
+/*
+**parse.c
+*/
+t_map				*get_map(char *filename);
+
 #endif
