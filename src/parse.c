@@ -8,9 +8,9 @@ static t_list	*get_file(char *filename)
 
 	file = NULL;
 	fd = open(filename, O_RDONLY);
-	while (get_next_line(&str, fd) > 0)
+	while (get_next_line(fd, &str) > 0)
 	{
-		ft_lstaddend(&lst, ft_lstnew(str, ft_strlen(str) + 1));
+		ft_lstaddend(&file, ft_lstnew(str, ft_strlen(str) + 1));
 		free(str);
 	}
 	close(fd);

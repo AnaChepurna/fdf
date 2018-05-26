@@ -13,6 +13,12 @@ typedef struct		s_map
 	int				**map;
 }					t_map;
 
+typedef struct		s_mlx
+{
+	void			*ptr;
+	void			*win;
+}					t_mlx;
+
 /*
 **memory.c
 */

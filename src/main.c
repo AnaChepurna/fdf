@@ -2,13 +2,19 @@
 
 static void		process(char *filename)
 {
-	t_map		*map;
+	(void)filename;
+	//t_map		*map;
+	t_mlx		mlx;
 
-	map = get_map(filename);
-	clear_map(&map);
+	//map = get_map(filename);
+	mlx.ptr = mlx_init();
+	mlx.win = mlx_new_window(mlx.ptr, 2000, 2000, "test");
+	while (42)
+	{}
+	//clear_map(&map);
 }
 
-int				main(int argc, char const *argv[])
+int				main(int argc, char *argv[])
 {
 	if (argc != 2)
 	{

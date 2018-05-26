@@ -21,11 +21,14 @@ FILES = main.c \
 SRC = $(addprefix $(SRC_DIR), $(FILES))
 OBJ = $(SRC:.c=.o)
 LIB = libft/libft.a
+LIB_LNK = -L libft/ -lft
+MLX = minilibx_macos/libmlx.a
+MLX_LNK = -L minilibx_macos/ -lmlx -framework OpenGL -framework AppKit
 
 all: $(NAME)
 
-$(NAME): $(LIB) $(OBJ)
-	$(CC) $(OBJ) libft/libft.a -o $(NAME)
+$(NAME): $(LIB) $(MLX) $(OBJ)
+	$(CC) $(OBJ) $(LIB_LNK) $(MLX_LNK) -o $(NAME)
 
 %.o: %.c $(INCL)
 	$(CC) -c $(CFLAG) $< -o $@
@@ -33,12 +36,15 @@ $(NAME): $(LIB) $(OBJ)
 clean:
 	make -C libft/ clean
 	rm -rf $(OBJ)
-	make -C visualizer/ clean
+	make -C minilibx_macos clean
 
 fclean: clean
 	make -C libft/ fclean
 	rm -rf $(NAME)
-	make -C visualizer/ fclean
+	#make -C minilibx_macos fclean
+
+$(MLX):
+	make -C minilibx_macos
 
 $(LIB):
 	make -C libft
