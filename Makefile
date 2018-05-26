@@ -15,7 +15,9 @@ CFLAG = -Wall -Wextra -Werror
 NAME = fdf
 INCL = fdf.h
 SRC_DIR = src/
-FILES = main.c 
+FILES = main.c \
+		parse.c \
+		memory.c
 SRC = $(addprefix $(SRC_DIR), $(FILES))
 OBJ = $(SRC:.c=.o)
 LIB = libft/libft.a
