@@ -6,6 +6,10 @@
 # include <fcntl.h>
 # include "minilibx_macos/mlx.h"
 
+# define PARSE	1
+# define CLEAR	2
+# define GET	3
+
 typedef struct		s_map
 {
 	int				x;
@@ -23,7 +27,7 @@ typedef struct		s_mlx
 **memory.c
 */
 t_map				*new_map(void);
-void				clear_map(t_map **map);
+t_map				*map_manager(int mode, char *filename);
 
 /*
 **parse.c

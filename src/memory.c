@@ -1,6 +1,6 @@
 #include "../fdf.h"
 
-t_map	*new_map(void)
+t_map		*new_map(void)
 {
 	t_map *map;
 
@@ -13,7 +13,7 @@ t_map	*new_map(void)
 	return (map);
 }
 
-void	clear_map(t_map **map)
+static void	clear_map(t_map **map)
 {
 	int		i;
 
@@ -29,4 +29,18 @@ void	clear_map(t_map **map)
 		free(*map);
 		*map = NULL;
 	}
+}
+
+t_map		*map_manager(int mode, char *filename)
+{
+	static t_map *map = NULL;
+
+	if (mode == PARSE)
+		map = get_map(filename);
+	else if (mode == CLEAR)
+	{
+		if (map)
+			clear_map(&map);
+	}
+	return (map);
 }

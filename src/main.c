@@ -3,15 +3,13 @@
 static void		process(char *filename)
 {
 	(void)filename;
-	//t_map		*map;
 	t_mlx		mlx;
 
-	//map = get_map(filename);
+	map_manager(PARSE, filename);
 	mlx.ptr = mlx_init();
 	mlx.win = mlx_new_window(mlx.ptr, 1000, 1000, "test");
 	mlx_key_hook(mlx.win, key_handler, &mlx);
 	mlx_loop(mlx.ptr);
-	//clear_map(&map);
 }
 
 int				main(int argc, char *argv[])

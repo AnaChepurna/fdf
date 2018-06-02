@@ -3,6 +3,7 @@
 static int	exit_program(t_mlx	*mlx)
 {
 	mlx_destroy_window(mlx->ptr, mlx->win);
+	map_manager(CLEAR, NULL);
 	exit(0);
 	return (1);
 }
