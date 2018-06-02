@@ -30,4 +30,9 @@ void				clear_map(t_map **map);
 */
 t_map				*get_map(char *filename);
 
+/*
+**key.h
+*/
+int					key_handler(int keycode, void *param);
+
 #endif

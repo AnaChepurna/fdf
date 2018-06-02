@@ -8,9 +8,9 @@ static void		process(char *filename)
 
 	//map = get_map(filename);
 	mlx.ptr = mlx_init();
-	mlx.win = mlx_new_window(mlx.ptr, 2000, 2000, "test");
-	while (42)
-	{}
+	mlx.win = mlx_new_window(mlx.ptr, 1000, 1000, "test");
+	mlx_key_hook(mlx.win, key_handler, &mlx);
+	mlx_loop(mlx.ptr);
 	//clear_map(&map);
 }
 
