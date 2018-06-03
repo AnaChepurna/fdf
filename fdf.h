@@ -6,9 +6,14 @@
 # include <fcntl.h>
 # include "minilibx_macos/mlx.h"
 
-# define PARSE	1
-# define CLEAR	2
-# define GET	3
+# define PARSE		1
+# define CLEAR		2
+# define GET		3
+# define W_NAME		"Fdf"
+# define W_Y_SIZE	1000
+# define W_X_SIZE	1000
+# define I_Y_SIZE	W_Y_SIZE
+# define I_X_SIZE	W_X_SIZE
 
 typedef struct		s_map
 {
@@ -21,6 +26,7 @@ typedef struct		s_mlx
 {
 	void			*ptr;
 	void			*win;
+	void			*img;
 }					t_mlx;
 
 /*
