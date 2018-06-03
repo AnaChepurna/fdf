@@ -22,7 +22,7 @@ void	ft_memclr(void *ap, size_t n)
 		i = 0;
 		buf = (char *)ap;
 		while (i < n)
-			buf[i++] = 0;
+			buf[i++] = '\0';
 		free(ap);
 	}
 }

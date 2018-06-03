@@ -23,7 +23,10 @@ static void	clear_map(t_map **map)
 		{
 			i = -1;
 			while (++i < (*map)->y)
-				free((*map)->map[i]);
+			{
+				if ((*map)->map[i])
+					free((*map)->map[i]);
+			}
 			free((*map)->map);
 		}
 		free(*map);
@@ -38,9 +41,6 @@ t_map		*map_manager(int mode, char *filename)
 	if (mode == PARSE)
 		map = get_map(filename);
 	else if (mode == CLEAR)
-	{
-		if (map)
 			clear_map(&map);
-	}
 	return (map);
 }
