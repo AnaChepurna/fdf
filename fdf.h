@@ -15,12 +15,15 @@
 # define W_Y_SIZE	1000
 # define W_X_SIZE	1000
 # define W_FRAME	40
-# define VALUE 		5
+# define VALUE 		10
+# define ABS(n)		((n) >= 0 ? (n) : -(n))
 
 typedef	struct 		s_peak
 {
 	int				x;
 	int				y;
+	int				real_x;
+	int				real_y;
 	int 			value;
 	int				color;
 }					t_peak;
