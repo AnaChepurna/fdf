@@ -15,6 +15,7 @@
 # define W_Y_SIZE	1000
 # define W_X_SIZE	1000
 # define W_FRAME	40
+# define VALUE 		5
 
 typedef	struct 		s_peak
 {
@@ -41,6 +42,8 @@ typedef struct		s_mlx
 	void			*ptr;
 	void			*win;
 	void			*img;
+	int				y_angle;
+	int				z_angle;
 }					t_mlx;
 
 /*

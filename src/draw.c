@@ -1,31 +1,38 @@
 #include "../fdf.h"
 
-// static void		vector(int *i, int mode)
-// {
-// 	if (mode == PLUS)
-// 		(*i)++;
-// 	else if (mode == MINUS)
-// 		(*i)--;
-// }
+static void		get_real_coords(int *y, int *x, t_mlx *mlx, t_peak peak, t_map *map)
+{
+	if (peak.y < map->axis_y)
+	{
+		*y = peak.y + ((map->axis_y - peak.y) / 3 * mlx->y_angle);
+	}
+	else if (peak.y > map->axis_y)
+	{
+		*y = peak.y + ((map->axis_y - peak.y) / 3 * mlx->y_angle);
+	}
+	*x = peak.x;
+}
 
-// void			draw_line(t_mlx *mlx, t_peak *a, t_peak *b)
-// {
-// 	int 	module_y;
-// 	int 	module_x;
-// 	int		mode_y;
-// 	int		mode_x;
+static	void	draw_axises(t_mlx *mlx, t_map *map)
+{
+	int x;
+	int y;
 
-// 	module_y = a->y - b->y;
-// 	module_x = a->x - b->x;
-
-// }
-
-// void			draw_pixel(void *ptr, void *win, int x, int y, int color)
-// {
-// 	static int 	size = 6;
-
-// 	mlx_pixel_put(ptr, win, (x + 1) * size, (y + 1) * size, color);
-// }
+	x = map->axis_x;
+	y = 0;
+	while (y < W_Y_SIZE)
+	{
+		mlx_pixel_put(mlx->ptr, mlx->win, x, y, 0xc0c0c0);
+		y += 6;
+	}
+	y = map->axis_y;
+	x = 0;
+	while (x < W_X_SIZE)
+	{
+		mlx_pixel_put(mlx->ptr, mlx->win, x, y, 0xc0c0c0);
+		x += 6;
+	}
+}
 
 void			draw(t_mlx *mlx)
 {
@@ -33,10 +40,16 @@ void			draw(t_mlx *mlx)
 	int x;
 	t_map	*map;
 	t_peak 	peak;
-	int color;
+	int color1;
+	int	y_coord;
+	int	x_coord;
 
+	printf("y_angle = %i\n", mlx->y_angle);
+	mlx_clear_window(mlx->ptr, mlx->win);
 	map = map_manager(GET, NULL);
-	color = 0x00ff00;
+	draw_axises(mlx, map);
+	color1 = 0x00ff00;
+	int color2 = 0xff33da;
 	y = -1;
 	while (++y < map->y)
 	{
@@ -44,7 +57,8 @@ void			draw(t_mlx *mlx)
 		while (++x < map->x)
 		{
 			peak = map->map[y][x];
-			mlx_pixel_put(mlx->ptr, mlx->win, peak.x, peak.y, color);
+			get_real_coords(&y_coord, &x_coord, mlx, peak, map);
+			mlx_pixel_put(mlx->ptr, mlx->win, x_coord, y_coord, y < map->y / 2 ? color1 : color2);
 		}
 	}
 }
