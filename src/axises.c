@@ -31,7 +31,7 @@ static int	get_axis(int num, int ratio, int frame)
 	if (num % 2)
 		return ((num / 2) * ratio + frame);
 	else
-		return (((num / 2) * ratio + frame) + ratio / 2);
+		return (((num / 2 - 1) * ratio + frame) + ratio / 2);
 }
 
 void		calculate_coords(t_map *map)
