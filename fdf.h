@@ -6,12 +6,15 @@
 # include <fcntl.h>
 # include "minilibx_macos/mlx.h"
 
+#include <stdio.h>
+
 # define PARSE		1
 # define CLEAR		2
 # define GET		3
 # define W_NAME		"Fdf"
 # define W_Y_SIZE	1000
 # define W_X_SIZE	1000
+# define W_FRAME	40
 
 typedef	struct 		s_peak
 {
@@ -26,6 +29,11 @@ typedef struct		s_map
 	int				x;
 	int				y;
 	t_peak			**map;
+	int				ratio;
+	int				axis_x;
+	int				axis_y;
+	int				x_frame;
+	int				y_frame;
 }					t_map;
 
 typedef struct		s_mlx
@@ -55,5 +63,11 @@ int					key_handler(int keycode, void *param);
 **draw.c
 */
 void				draw(t_mlx *mlx);
+
+/*
+**axises.c
+*/
+int					get_ratio(t_map *map);
+void				calculate_coords(t_map *map);
 
 #endif

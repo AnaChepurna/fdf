@@ -19,7 +19,8 @@ FILES = main.c \
 		parse.c \
 		memory.c \
 		key.c \
-		draw.c
+		draw.c \
+		axises.c
 SRC = $(addprefix $(SRC_DIR), $(FILES))
 OBJ = $(SRC:.c=.o)
 LIB = libft/libft.a

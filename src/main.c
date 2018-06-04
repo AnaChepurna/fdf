@@ -8,7 +8,7 @@ static void		process(char *filename)
 	map_manager(PARSE, filename);
 	mlx.ptr = mlx_init();
 	mlx.win = mlx_new_window(mlx.ptr, W_X_SIZE, W_Y_SIZE, W_NAME);
-	//draw(&mlx);
+	draw(&mlx);
 	mlx_key_hook(mlx.win, key_handler, &mlx);
 	mlx_loop(mlx.ptr);
 }

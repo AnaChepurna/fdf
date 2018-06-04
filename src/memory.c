@@ -39,7 +39,11 @@ t_map		*map_manager(int mode, char *filename)
 	static t_map *map = NULL;
 
 	if (mode == PARSE)
+	{
 		map = get_map(filename);
+		map->ratio = get_ratio(map);
+		calculate_coords(map);
+	}
 	else if (mode == CLEAR)
 			clear_map(&map);
 	return (map);

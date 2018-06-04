@@ -27,25 +27,24 @@
 // 	mlx_pixel_put(ptr, win, (x + 1) * size, (y + 1) * size, color);
 // }
 
-// void			draw(t_mlx *mlx)
-// {
-// 	int y;
-// 	int x;
-// 	t_map	*map;
-// 	int color;
+void			draw(t_mlx *mlx)
+{
+	int y;
+	int x;
+	t_map	*map;
+	t_peak 	peak;
+	int color;
 
-// 	map = map_manager(GET, NULL);
-// 	int green = 0x00ff00;
-// 	int pink = 0xf08080;
-// 	y = -1;
-// 	while (++y < map->y)
-// 	{
-// 		x = -1;
-// 		while (++x < map->x)
-// 		{
-// 			color  = map->map[y][x] == 0 ? green : pink;
-// 			draw_pixel(mlx->ptr, mlx->win, x, y, color);
-// 			color += 100;
-// 		}
-// 	}
-// }
+	map = map_manager(GET, NULL);
+	color = 0x00ff00;
+	y = -1;
+	while (++y < map->y)
+	{
+		x = -1;
+		while (++x < map->x)
+		{
+			peak = map->map[y][x];
+			mlx_pixel_put(mlx->ptr, mlx->win, peak.x, peak.y, color);
+		}
+	}
+}
