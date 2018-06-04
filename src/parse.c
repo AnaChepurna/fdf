@@ -35,17 +35,17 @@ static int		count_numbers(char *str)
 	return (count);
 }
 
-static int		*get_intarr(char *str, int len)
+static t_peak		*get_intarr(char *str, int len)
 {
-	int		*res;
+	t_peak	*res;
 	int		i;
 
 	i = 0;
-	if ((res = (int *)malloc(sizeof(int) * len)))
+	if ((res = (t_peak *)malloc(sizeof(t_peak) * len)))
 	{
 		while (i < len)
 		{
-			res[i] = ft_atoi(str);
+			res[i].value = ft_atoi(str);
 			while (ft_isdigit(*str))
 				str++;
 			while (IS_SPACE(*str))
@@ -63,7 +63,7 @@ static void		fill_map(t_list *file, t_map *map)
 
 	map->y = ft_lstlen(file);
 	map->x = count_numbers((char *)file->content);
-	if ((map->map = (int **)malloc(sizeof(int *) * map->y)))
+	if ((map->map = (t_peak **)malloc(sizeof(t_peak *) * map->y)))
 	{
 		lst = file;
 		i = 0;

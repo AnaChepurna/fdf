@@ -9,18 +9,23 @@
 # define PARSE		1
 # define CLEAR		2
 # define GET		3
-# define PLUS		1
-# define MINUS		2
 # define W_NAME		"Fdf"
 # define W_Y_SIZE	1000
 # define W_X_SIZE	1000
-# define ABS(x)		((x) > 0 ? (x) : -(x))
+
+typedef	struct 		s_peak
+{
+	int				x;
+	int				y;
+	int 			value;
+	int				color;
+}					t_peak;
 
 typedef struct		s_map
 {
 	int				x;
 	int				y;
-	int				**map;
+	t_peak			**map;
 }					t_map;
 
 typedef struct		s_mlx
@@ -29,12 +34,6 @@ typedef struct		s_mlx
 	void			*win;
 	void			*img;
 }					t_mlx;
-
-typedef	struct s_peak
-{
-	int			x;
-	int			y;
-}				t_peak;
 
 /*
 **memory.c
