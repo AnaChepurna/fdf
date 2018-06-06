@@ -12,8 +12,8 @@
 # define CLEAR		2
 # define GET		3
 # define W_NAME		"Fdf"
-# define W_Y_SIZE	1000
-# define W_X_SIZE	1000
+# define W_Y_SIZE	1200
+# define W_X_SIZE	1200
 # define W_FRAME	40
 # define VALUE 		10
 # define ABS(n)		((n) >= 0 ? (n) : -(n))

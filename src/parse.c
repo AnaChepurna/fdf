@@ -27,10 +27,13 @@ static int		count_numbers(char *str)
 		if (ft_isdigit(*str))
 		{
 			count++;
+			if (*str == '-')
+				str++;
 			while (ft_isdigit(*str))
 				str++;
 		}
-		str++;
+		if (*str)
+			str++;
 	}
 	return (count);
 }
@@ -46,6 +49,8 @@ static t_peak		*get_intarr(char *str, int len)
 		while (i < len)
 		{
 			res[i].value = ft_atoi(str);
+			if (*str == '-')
+				str++;
 			while (ft_isdigit(*str))
 				str++;
 			while (IS_SPACE(*str))
