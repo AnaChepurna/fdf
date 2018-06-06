@@ -14,7 +14,7 @@
 # define W_NAME		"Fdf"
 # define W_Y_SIZE	1200
 # define W_X_SIZE	1200
-# define W_FRAME	40
+# define W_FRAME	100
 # define VALUE 		10
 # define ABS(n)		((n) >= 0 ? (n) : -(n))
 

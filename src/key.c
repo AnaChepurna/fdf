@@ -22,6 +22,20 @@ static int	y_angle(int keycode, t_mlx *mlx)
 	return (1);
 }
 
+static int	z_angle(int keycode, t_mlx *mlx)
+{
+	if (keycode == 88)
+		mlx->z_angle++;
+	else
+		mlx->z_angle--;
+	if (mlx->z_angle < 0)
+		mlx->z_angle = 11;
+	if (mlx->z_angle > 11)
+		mlx->z_angle = 0;
+	draw(mlx);
+	return (1);
+}
+
 int		key_handler(int keycode, void *param)
 {
 	t_mlx *mlx;
@@ -34,5 +48,7 @@ int		key_handler(int keycode, void *param)
 		return (exit_program(mlx));
 	if (keycode == 91 || keycode == 84)
 		return (y_angle(keycode, mlx));
+	if (keycode == 88 || keycode == 86)
+		return (z_angle(keycode, mlx));
 	return (1);
 }
