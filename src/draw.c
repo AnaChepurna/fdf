@@ -19,7 +19,7 @@ void			draw_line(t_mlx *mlx, t_peak a, t_peak b)
 	{
 		x = a.real_x + module_x * i / del;
 		y = a.real_y + module_y * i / del;
-		mlx_pixel_put(mlx->ptr, mlx->win, x, y, a.color);//0x00ff00);
+		mlx_pixel_put(mlx->ptr, mlx->win, x, y, get_draw_color(a, b, i, del));//0x00ff00);
 		i++;
 	}
 }

@@ -81,5 +81,6 @@ void				calculate_coords(t_map *map);
 **color.c
 */
 void				set_colors(t_map *map);
+int					get_draw_color(t_peak a, t_peak b, int index, int max);
 
 #endif
