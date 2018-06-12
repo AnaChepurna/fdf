@@ -16,6 +16,7 @@
 # define W_X_SIZE	1200
 # define W_FRAME	100
 # define VALUE 		10
+# define COLOR_VAL	10
 # define ABS(n)		((n) >= 0 ? (n) : -(n))
 
 typedef	struct 		s_peak
@@ -75,5 +76,10 @@ void				draw(t_mlx *mlx);
 */
 int					get_ratio(t_map *map);
 void				calculate_coords(t_map *map);
+
+/*
+**color.c
+*/
+void				set_colors(t_map *map);
 
 #endif

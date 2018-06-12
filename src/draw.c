@@ -19,32 +19,23 @@ void			draw_line(t_mlx *mlx, t_peak a, t_peak b)
 	{
 		x = a.real_x + module_x * i / del;
 		y = a.real_y + module_y * i / del;
-		mlx_pixel_put(mlx->ptr, mlx->win, x, y, 0x00ff00);
+		mlx_pixel_put(mlx->ptr, mlx->win, x, y, a.color);//0x00ff00);
 		i++;
 	}
 }
 
-int				get_radius(int module_y, int module_x)
-{
-	return (module_x * module_x + module_y * module_y);
-}
-
-int				get_x_module(int module_y, int radius);
-{
-	return ((int)sqrt(radius - module_y * module_y));
-}
-
 static void		get_real_coords(t_mlx *mlx, t_peak *peak, t_map *map)
 {
-	static int	hight[12] = {0, 1, 2, 3, 2, 1, 0, -1, -2, -3, -2, -1};
-	static int	angle[12] = {0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1};
+	static int	hight[24] = {0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0,
+		-1, -2, -3, -4, -5, -6, -5, -4, -3, -2, -1};
+	static int	angle[24] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ,11, 12,
+		11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
 
 	peak->real_y = peak->y;
 	peak->real_x = peak->x;
-	peak->real_y += ((map->axis_y - peak->y) * angle[mlx->y_angle] / 3);
-	peak->real_y -= VALUE * peak->value * hight[mlx->y_angle] / 3;
-	buf = 
-	 // peak->real_y += (map->axis_y - peak->y) * angle[mlx->z_angle] / 6;
+	peak->real_y += ((map->axis_y - peak->y) * angle[mlx->y_angle] / 6);
+	peak->real_y -= VALUE * peak->value * hight[mlx->y_angle] / 6;
+	// peak->real_y += (map->axis_y - peak->y) * angle[mlx->z_angle] / 6;
 	// peak->real_y += (map->axis_x - peak->x) * angle[mlx->z_angle] * 2 / 12;
 	// peak->real_x -= (map->axis_y - peak->y) * angle[mlx->z_angle] * 2 / 12;
 	// peak->real_x += (map->axis_x - peak->x) * angle[mlx->z_angle] / 6;
@@ -77,15 +68,12 @@ void			draw(t_mlx *mlx)
 	int x;
 	t_map	*map;
 	t_peak 	peak;
-	int color1;
 
 	//printf("y_angle = %i\n", mlx->y_angle);
 	mlx_clear_window(mlx->ptr, mlx->win);
 	map = map_manager(GET, NULL);
 	draw_axises(mlx, map);
 
-	color1 = 0x00ff00;
-	int color2 = 0xff33da;
 	y = -1;
 	while (++y < map->y)
 	{
@@ -94,7 +82,6 @@ void			draw(t_mlx *mlx)
 		{
 			peak = map->map[y][x];
 			get_real_coords(mlx, &peak, map);
-			mlx_pixel_put(mlx->ptr, mlx->win, peak.real_x, peak.real_y, y < map->y / 2 ? color1 : color2);
 			//printf("value of %i-%i = %i\n", y, x, peak.value);
 			if (x < map->x - 1)
 			{

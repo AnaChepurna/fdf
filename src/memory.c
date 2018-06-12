@@ -43,6 +43,7 @@ t_map		*map_manager(int mode, char *filename)
 		map = get_map(filename);
 		map->ratio = get_ratio(map);
 		calculate_coords(map);
+		set_colors(map);
 	}
 	else if (mode == CLEAR)
 			clear_map(&map);

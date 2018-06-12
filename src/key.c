@@ -15,8 +15,8 @@ static int	y_angle(int keycode, t_mlx *mlx)
 	else
 		mlx->y_angle++;
 	if (mlx->y_angle < 0)
-		mlx->y_angle = 11;
-	if (mlx->y_angle > 11)
+		mlx->y_angle = 23;
+	if (mlx->y_angle > 23)
 		mlx->y_angle = 0;
 	draw(mlx);
 	return (1);
