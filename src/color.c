@@ -49,9 +49,9 @@ void			set_colors(t_map *map)
 
 int				get_draw_color(t_peak a, t_peak b, int index, int max)
 {
-	int red;
-	int green;
-	int	blue;
+	int		red;
+	int		green;
+	int		blue;
 
 	red = (a.color & 0xff0000) >> 16;
 	green = (a.color & 0x00ff00) >> 8;
