@@ -1,32 +1,32 @@
 #include "../fdf.h"
 
-// static int		get_color(int value, int base, int setter)
-// {
-// 	static int	step = 0;
-// 	int			i;
-
-// 	if (!step)
-// 		step = 0x0000ff * 2 / COLOR_VAL;
-// 	i = -1;
-// 	while (++i < value)
-// 	{
-// 		if (base <= 0xfff0f0)
-// 			base += setter * step;
-// 	}
-// 	while (--i >= value)
-// 		base -= setter * step;
-// 	return (base);
-// }
-
-static int		point_color(int	value)
+static int		get_color(int	value)
 {
-	if (value < 0)
-		return (0x00ffff);
-	if (value < COLOR_VAL)
-		return (0x00ff00);
-	else if (value < COLOR_VAL / 2)
-		return (0xffff00);
-	return (0xff0000);
+	static int	step = 0xff / COLOR_VAL;
+	int			rgb[3];
+
+	if (value >= COLOR_VAL * 2)
+		return (0xff0000);
+	if (value < COLOR_VAL * -2)
+		return (0x0000ff);
+	rgb[0] = 0;
+	rgb[1] = 0xff;
+	rgb[2] = 0;
+	if (value >= COLOR_VAL)
+	{
+		rgb[0] = 0xff;
+		rgb[1] = 0xff - step * (COLOR_VAL - value);
+	}
+	else if (value >= 0)
+		rgb[0] = step * value;
+	else if (value >= -COLOR_VAL)
+		rgb[2] = 0xff + step * value;
+	else
+	{
+		rgb[2] = 0xff;
+		rgb[1] = 0xff + step * (value - COLOR_VAL);
+	}
+	return ((rgb[0] << 16) + (rgb[1] << 8) + rgb[2]);
 }
 
 void			set_colors(t_map *map)
@@ -40,7 +40,7 @@ void			set_colors(t_map *map)
 		i = -1;
 		while (++i < map->x)
 		{
-			map->map[j][i].color = point_color(map->map[j][i].value);
+			map->map[j][i].color = get_color(map->map[j][i].value);
 			printf("%i = %#x; ", map->map[j][i].value, map->map[j][i].color);
 		}
 		printf("\n");
