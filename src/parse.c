@@ -17,6 +17,28 @@ static t_list	*get_file(char *filename)
 	return (file);
 }
 
+static void			parse_color(char **str, t_peak *peak)
+{
+	t_map *map;
+
+	map = map_manager(GET, NULL);
+	map->colors = 0;
+	(*str)++;
+	if (ft_strnequ("0x", *str, 2) || ft_strnequ("0X", *str, 2))
+	{
+		*str += 2;
+		if (peak)
+			peak->color = ft_atoi_base(*str, 16);
+	}
+	else
+	{
+		if (peak)
+			peak->color = ft_atoi_base(*str, 16);
+	}
+	while (ft_isdigit(**str))
+		(*str)++;
+}
+
 static int		count_numbers(char *str)
 {
 	int		count;
@@ -31,31 +53,13 @@ static int		count_numbers(char *str)
 				str++;
 			while (ft_isdigit(*str))
 				str++;
+			if (*str = ',')
+				parse_color(&str, NULL);
 		}
 		if (*str)
 			str++;
 	}
 	return (count);
-}
-
-static void			parse_color(char **str, t_peak *peak)
-{
-	t_map *map;
-
-	map = map_manager(GET, NULL);
-	map->colors = 0;
-	(*str)++;
-	if (ft_strnequ("0x", *str, 2) || ft_strnequ("0X", *str, 2))
-	{
-		*str += 2;
-		peak->color = ft_atoi_base(*str, 16);
-	}
-	else if (ft_strnequ("0", *str, 1))
-		peak->color = ft_atoi_base(*str, 8);
-	else
-		peak->color = ft_atoi(*str);
-	while (ft_isdigit(**str))
-		(*str)++;
 }
 
 static t_peak		*get_intarr(char *str, int len)
