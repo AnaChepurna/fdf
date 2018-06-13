@@ -39,6 +39,7 @@ typedef struct		s_map
 	int				axis_y;
 	int				x_frame;
 	int				y_frame;
+	int				colors;
 }					t_map;
 
 typedef struct		s_mlx

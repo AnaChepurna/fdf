@@ -38,6 +38,26 @@ static int		count_numbers(char *str)
 	return (count);
 }
 
+static void			parse_color(char **str, t_peak *peak)
+{
+	t_map *map;
+
+	map = map_manager(GET, NULL);
+	map->colors = 0;
+	(*str)++;
+	if (ft_strnequ("0x", *str, 2) || ft_strnequ("0X", *str, 2))
+	{
+		*str += 2;
+		peak->color = ft_atoi_base(*str, 16);
+	}
+	else if (ft_strnequ("0", *str, 1))
+		peak->color = ft_atoi_base(*str, 8);
+	else
+		peak->color = ft_atoi(*str);
+	while (ft_isdigit(**str))
+		(*str)++;
+}
+
 static t_peak		*get_intarr(char *str, int len)
 {
 	t_peak	*res;
@@ -53,6 +73,10 @@ static t_peak		*get_intarr(char *str, int len)
 				str++;
 			while (ft_isdigit(*str))
 				str++;
+			if (*str == ',')
+				parse_color(&str, &res[i]);
+			else
+				res[i].color = 0xffffff;
 			while (IS_SPACE(*str))
 				str++;
 			i++;
@@ -61,36 +85,29 @@ static t_peak		*get_intarr(char *str, int len)
 	return (res);
 }
 
-static void		fill_map(t_list *file, t_map *map)
-{
-	t_list	*lst;
-	int 	i;
-
-	map->y = ft_lstlen(file);
-	map->x = count_numbers((char *)file->content);
-	if ((map->map = (t_peak **)malloc(sizeof(t_peak *) * map->y)))
-	{
-		lst = file;
-		i = 0;
-		while (lst && i < map->y)
-		{
-			map->map[i] = get_intarr((char *)lst->content, map->x);
-			i++;
-			lst = lst->next;
-		}
-	}
-}
-
 t_map			*get_map(char *filename)
 {
 	t_list	*file;
+	t_list	*lst;
 	t_map	*map;
+	int 	i;
 
 	if ((map = new_map()))
-	{;
+	{
 		if ((file = get_file(filename)))
 		{
-			fill_map(file, map);
+			map->y = ft_lstlen(file);
+			map->x = count_numbers((char *)file->content);
+			if ((map->map = (t_peak **)malloc(sizeof(t_peak *) * map->y)))
+			{
+				lst = file;
+				i = -1;
+				while (lst && ++i < map->y)
+				{
+					map->map[i] = get_intarr((char *)lst->content, map->x);
+					lst = lst->next;
+				}
+			}
 			ft_lstdel(&file, &ft_memclr);
 		}
 	}

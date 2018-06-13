@@ -9,6 +9,7 @@ t_map		*new_map(void)
 		map->x = 0;
 		map->y = 0;
 		map->map = NULL;
+		map->colors = 1;
 	}
 	return (map);
 }
@@ -43,7 +44,8 @@ t_map		*map_manager(int mode, char *filename)
 		map = get_map(filename);
 		map->ratio = get_ratio(map);
 		calculate_coords(map);
-		set_colors(map);
+		if (map->colors)
+			set_colors(map);
 	}
 	else if (mode == CLEAR)
 			clear_map(&map);
