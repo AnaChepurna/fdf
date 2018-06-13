@@ -49,6 +49,9 @@ typedef struct		s_mlx
 	void			*img;
 	int				y_angle;
 	int				z_angle;
+	int				zoom;
+	int				y_shift;
+	int				x_shift;
 }					t_mlx;
 
 /*

@@ -7,6 +7,7 @@ static void		process(char *filename)
 
 	mlx.y_angle = 0;
 	mlx.z_angle = 0;
+	mlx.zoom = 0;
 	map_manager(PARSE, filename);
 	mlx.ptr = mlx_init();
 	mlx.win = mlx_new_window(mlx.ptr, W_X_SIZE, W_Y_SIZE, W_NAME);
