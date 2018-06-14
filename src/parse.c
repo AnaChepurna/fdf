@@ -17,12 +17,10 @@ static t_list	*get_file(char *filename)
 	return (file);
 }
 
-static void			parse_color(char **str, t_peak *peak)
+static void			parse_color(char **str, t_peak *peak, t_map *map)
 {
-	t_map *map;
-
-	map = map_manager(GET, NULL);
-	map->colors = 0;
+	if (map)
+		map->colors = 0;
 	(*str)++;
 	if (ft_strnequ("0x", *str, 2) || ft_strnequ("0X", *str, 2))
 	{
@@ -35,7 +33,8 @@ static void			parse_color(char **str, t_peak *peak)
 		if (peak)
 			peak->color = ft_atoi_base(*str, 16);
 	}
-	while (ft_isdigit(**str))
+	while (ft_isdigit(**str) || (**str >= 'a' && **str <= 'f')
+		|| (**str >= 'A' && **str <= 'F'))
 		(*str)++;
 }
 
@@ -54,7 +53,7 @@ static int		count_numbers(char *str)
 			while (ft_isdigit(*str))
 				str++;
 			if (*str == ',')
-				parse_color(&str, NULL);
+				parse_color(&str, NULL, NULL);
 		}
 		if (*str)
 			str++;
@@ -62,7 +61,7 @@ static int		count_numbers(char *str)
 	return (count);
 }
 
-static t_peak		*get_intarr(char *str, int len)
+static t_peak		*get_intarr(char *str, int len, t_map *map)
 {
 	t_peak	*res;
 	int		i;
@@ -72,17 +71,17 @@ static t_peak		*get_intarr(char *str, int len)
 	{
 		while (i < len)
 		{
+			while (IS_SPACE(*str))
+				str++;
 			res[i].value = ft_atoi(str);
 			if (*str == '-')
 				str++;
 			while (ft_isdigit(*str))
 				str++;
 			if (*str == ',')
-				parse_color(&str, &res[i]);
+				parse_color(&str, &res[i], map);
 			else
 				res[i].color = 0xffffff;
-			while (IS_SPACE(*str))
-				str++;
 			i++;
 		}
 	}
@@ -108,11 +107,12 @@ t_map			*get_map(char *filename)
 				i = -1;
 				while (lst && ++i < map->y)
 				{
-					map->map[i] = get_intarr((char *)lst->content, map->x);
+					map->map[i] = get_intarr((char *)lst->content, map->x, map);
 					lst = lst->next;
 				}
 			}
 			ft_lstdel(&file, &ft_memclr);
+			printf("len = %i\n", map->x);
 		}
 	}
 	return (map);
