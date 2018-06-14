@@ -19,8 +19,8 @@ static int		get_color(int	value)
 	}
 	else if (value >= 0)
 		rgb[0] = step * value;
-	else if (value >= -COLOR_VAL)
-		rgb[2] = 0xff + step * value;
+	else if (value >= -1 * COLOR_VAL)
+		rgb[2] = - step * value;
 	else
 	{
 		rgb[2] = 0xff;
