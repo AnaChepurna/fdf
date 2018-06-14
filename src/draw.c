@@ -24,6 +24,17 @@ void			draw_line(t_mlx *mlx, t_peak a, t_peak b)
 	}
 }
 
+static void		get_x_angle(t_mlx *mlx, t_peak *peak, t_map *map)
+{
+	int		radius;
+	int		y;
+	int		x;
+
+	y = map->axis_y - peak->y;
+	x = map->axis_x - peak->x;
+	radius = y * y + x * x;
+}
+
 static void		get_real_coords(t_mlx *mlx, t_peak *peak, t_map *map)
 {
 	static int	hight[24] = {0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0,
@@ -35,10 +46,6 @@ static void		get_real_coords(t_mlx *mlx, t_peak *peak, t_map *map)
 	peak->real_x = peak->x;
 	peak->real_y += ((map->axis_y - peak->y) * angle[mlx->y_angle] / 6);
 	peak->real_y -= VALUE * peak->value * hight[mlx->y_angle] / 6;
-	// peak->real_y += (map->axis_y - peak->y) * angle[mlx->z_angle] / 6;
-	// peak->real_y += (map->axis_x - peak->x) * angle[mlx->z_angle] * 2 / 12;
-	// peak->real_x -= (map->axis_y - peak->y) * angle[mlx->z_angle] * 2 / 12;
-	// peak->real_x += (map->axis_x - peak->x) * angle[mlx->z_angle] / 6;
 }
 
 static	void	draw_axises(t_mlx *mlx, t_map *map)
