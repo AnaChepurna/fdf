@@ -15,7 +15,7 @@ static int		get_color(int	value)
 	if (value >= COLOR_VAL)
 	{
 		rgb[0] = 0xff;
-		rgb[1] = 0xff - step * (COLOR_VAL - value);
+		rgb[1] = 0xff + step * (COLOR_VAL - value);
 	}
 	else if (value >= 0)
 		rgb[0] = step * value;
@@ -24,7 +24,7 @@ static int		get_color(int	value)
 	else
 	{
 		rgb[2] = 0xff;
-		rgb[1] = 0xff + step * (value - COLOR_VAL);
+		rgb[1] = 0xff - step * (value - COLOR_VAL);
 	}
 	return ((rgb[0] << 16) + (rgb[1] << 8) + rgb[2]);
 }
@@ -57,16 +57,16 @@ int				get_draw_color(t_peak a, t_peak b, int index, int max)
 	green = (a.color & 0x00ff00) >> 8;
 	blue = a.color & 0x0000ff;
 	if ((b.color & 0xff0000 >> 16) >= red)
-		red += (((b.color & 0xff0000) >> 16) - red) / max * index;
+		red += (((b.color & 0xff0000) >> 16) - red) * index / max;
 	else
-		red -= (red - ((b.color & 0xff0000) >> 16)) / max * index;
+		red -= (red - ((b.color & 0xff0000) >> 16)) * index / max;
 	if (((b.color & 0x00ff00) >> 8) >= green)
-		green += (((b.color & 0x00ff00) >> 8) - green) / max * index;
+		green += (((b.color & 0x00ff00) >> 8) - green) * index / max;
 	else
-		green -= (green - ((b.color & 0x00ff00) >> 8)) / max * index;
+		green -= (green - ((b.color & 0x00ff00) >> 8)) * index / max;
 	if ((b.color & 0x0000ff) >= blue)
-		blue += (b.color & 0x0000ff - blue) / max * index;
+		blue += (b.color & 0x0000ff - blue) * index / max;
 	else
-		blue -= (blue - b.color & 0x0000ff) / max * index;
+		blue -= (blue - b.color & 0x0000ff) * index / max;
 	return ((red << 16) + (green << 8) + blue);
 }

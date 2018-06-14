@@ -19,7 +19,7 @@ void			draw_line(t_mlx *mlx, t_peak a, t_peak b)
 	{
 		x = a.real_x + module_x * i / del;
 		y = a.real_y + module_y * i / del;
-		mlx_pixel_put(mlx->ptr, mlx->win, x, y, get_draw_color(a, b, i, del));//0x00ff00);
+		mlx_pixel_put(mlx->ptr, mlx->win, x, y, get_draw_color(a, b, i, del));
 		i++;
 	}
 }
@@ -82,7 +82,6 @@ void			draw(t_mlx *mlx)
 		{
 			peak = map->map[y][x];
 			get_real_coords(mlx, &peak, map);
-			//printf("value of %i-%i = %i\n", y, x, peak.value);
 			if (x < map->x - 1)
 			{
 				get_real_coords(mlx, &(map->map[y][x + 1]), map);
@@ -93,8 +92,6 @@ void			draw(t_mlx *mlx)
 				get_real_coords(mlx, &(map->map[y + 1][x]), map);
 				draw_line(mlx, peak, map->map[y + 1][x]);
 			}
-			// if (x > 0)
-			// 	draw_line(mlx, peak, map->map[y][x - 1]);
 		}
 	}
 }

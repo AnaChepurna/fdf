@@ -53,7 +53,7 @@ static int		count_numbers(char *str)
 				str++;
 			while (ft_isdigit(*str))
 				str++;
-			if (*str = ',')
+			if (*str == ',')
 				parse_color(&str, NULL);
 		}
 		if (*str)

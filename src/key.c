@@ -36,30 +36,30 @@ static int	z_angle(int keycode, t_mlx *mlx)
 	return (1);
 }
 
-static int	zoom(int keycode, t_mlx *mlx)
-{
-	t_map	*map;
+// static int	zoom(int keycode, t_mlx *mlx)
+// {
+// 	t_map	*map;
 
-	map = map_manager(GET, NULL);
-	if (keycode == MINUS)
-	{
-		if (map->ratio > -2 * (mlx->zoom - 1))
-			mlx->zoom--;
-	}
-	else
-	{
-		if (map->ratio * (mlx->zoom + 1) < W_Y_SIZE / 2)
-			mlx->zoom++;
-	}
-	render_zoom(map, mlx);
-	draw(mlx);
-	return (1);
-}
+// 	map = map_manager(GET, NULL);
+// 	if (keycode == MINUS)
+// 	{
+// 		if (map->ratio > -2 * (mlx->zoom - 1))
+// 			mlx->zoom--;
+// 	}
+// 	else
+// 	{
+// 		if (map->ratio * (mlx->zoom + 1) < W_Y_SIZE / 2)
+// 			mlx->zoom++;
+// 	}
+// 	render_zoom(map, mlx);
+// 	draw(mlx);
+// 	return (1);
+// }
 
-static int	shift(int keycode, t_mlx *mlx)
-{
+// static int	shift(int keycode, t_mlx *mlx)
+// {
 	
-}
+// }
 
 int		key_handler(int keycode, void *param)
 {
