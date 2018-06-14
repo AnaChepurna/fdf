@@ -32,6 +32,7 @@ static void		get_z_angle(t_mlx *mlx, t_peak *peak, t_map *map)
 	double		angle;
 
 	printf("axis y = %i, axis x = %i\n", map->axis_y, map->axis_x);
+	printf("prev y = %i, real x = %i\n", peak->real_y, peak->real_x);
 	y = ABS(map->axis_y - peak->real_y);
 	x = ABS(map->axis_x - peak->real_x);
 	printf("y = %f, x = %f\n", y, x);
@@ -39,34 +40,38 @@ static void		get_z_angle(t_mlx *mlx, t_peak *peak, t_map *map)
 	printf("radius = %f\n", radius);
 	if (y)
 	{
-		printf("1 = %f\n", tan(1.0));
-		angle = atan(y / x);
+		printf("1 = %f\n", atan(1.0));
+		angle = atan(x / y);
 	}
 	else
-		angle = 90;
+		angle = 1.5708;
 	printf("angle was %f\n", angle);
 	angle += 0.261799 * mlx->z_angle;
 	printf("angle become %f\n", angle);
-	if (angle < 90)
+	if (angle < 1.5708)
 	{
 		y = radius * cos(angle);
 		x = radius * sin(angle);
 	}
 	else
 	{
-		angle -= 90;
-		y = radius * cos(angle);
-		x = radius * sin(angle);
+		angle -= 1.5708;
+		x = radius * cos(angle);
+		y = radius * sin(angle);
 	}
 	printf(" NEW!! y = %f, x = %f\n", y, x);
-	if (peak->real_y < map->axis_y)
-		peak->real_y = map->axis_y - y;
-	else
-		peak->real_y = map->axis_y + y;
-	if (peak->real_x < map->axis_x)
+	if (peak->real_y < map->axis_y && peak->real_x <= map->axis_x)
+	{
 		peak->real_x = map->axis_x - x;
-	else
-		peak->real_x = map->axis_x + x;
+		peak->real_y = map->axis_y - y;
+	}
+	else if (peak->real_y >= map->axis_y && peak->real_x <= map->axis_x)
+	{
+		peak->real_y = map->axis_y + y;
+		peak->real_x = map->axis_x - x;
+	}
+		printf("real y = %i, real x = %i\n", peak->real_y, peak->real_x);
+		mlx_pixel_put(mlx->ptr, mlx->win, peak->real_x, peak->real_y, 0x633D5C);
 }
 
 static void		get_real_coords(t_mlx *mlx, t_peak *peak, t_map *map)
@@ -125,7 +130,9 @@ void			draw(t_mlx *mlx)
 		while (++x < map->x)
 		{
 			peak = map->map[y][x];
+			printf("%s\n", RED);
 			get_real_coords(mlx, &peak, map);
+			printf("%s\n", RESET);
 			if (x < map->x - 1)
 			{
 				get_real_coords(mlx, &(map->map[y][x + 1]), map);
