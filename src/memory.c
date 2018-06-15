@@ -51,7 +51,7 @@ void		map_set(t_map *map)
 			map->map[y][x].x += (W_X_SIZE - map->x * map->ratio) / 2;
 			map->map[y][x].y *= map->ratio;
 			map->map[y][x].y += (W_Y_SIZE - map->y * map->ratio) / 2;
-			map->map[y][x].z *= map->ratio;
+			map->map[y][x].z *= VALUE;
 		}
 	}
 }

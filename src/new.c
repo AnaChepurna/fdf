@@ -109,6 +109,7 @@ void	rotate_x(t_map *map, double angle)
 			rad = atan2(copy_y, copy_z) + angle;
 			map->map[y][x].y = hypot(copy_y, copy_z) * sin(rad);
 			map->map[y][x].z = hypot(copy_y, copy_z) * cos(rad);
+			//map->map[y][x].y += copy_y - map->map[y][x].y;
 		}
 	}
 }
