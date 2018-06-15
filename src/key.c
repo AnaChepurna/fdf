@@ -10,31 +10,30 @@ static int	exit_program(t_mlx	*mlx)
 
 static int	y_angle(int keycode, t_mlx *mlx)
 {
+	t_map *map;
+
+	map = map_manager(GET, NULL);
 	if (keycode == 91)
-		mlx->y_angle--;
+		rotate_x(map, 0.03);
 	else
-		mlx->y_angle++;
-	if (mlx->y_angle < 0)
-		mlx->y_angle = 23;
-	if (mlx->y_angle > 23)
-		mlx->y_angle = 0;
-	draw(mlx);
+		rotate_x(map, -0.03);
+	render(mlx);
 	return (1);
 }
 
-static int	z_angle(int keycode, t_mlx *mlx)
-{
-	if (keycode == 88)
-		mlx->z_angle++;
-	else
-		mlx->z_angle--;
-	if (mlx->z_angle < 0)
-		mlx->z_angle = 11;
-	if (mlx->z_angle > 11)
-		mlx->z_angle = 0;
-	draw(mlx);
-	return (1);
-}
+// static int	z_angle(int keycode, t_mlx *mlx)
+// {
+// 	if (keycode == 88)
+// 		mlx->z_angle++;
+// 	else
+// 		mlx->z_angle--;
+// 	if (mlx->z_angle < 0)
+// 		mlx->z_angle = 11;
+// 	if (mlx->z_angle > 11)
+// 		mlx->z_angle = 0;
+// 	draw(mlx);
+// 	return (1);
+// }
 
 // static int	zoom(int keycode, t_mlx *mlx)
 // {
@@ -72,8 +71,8 @@ int		key_handler(int keycode, void *param)
 	if (keycode == 53)
 		return (exit_program(mlx));
 	if (keycode == 91 || keycode == 84)
-		return (y_angle(keycode, mlx));
-	if (keycode == 88 || keycode == 86)
-		return (z_angle(keycode, mlx));
+	 	return (y_angle(keycode, mlx));
+	// if (keycode == 88 || keycode == 86)
+	// 	return (z_angle(keycode, mlx));
 	return (1);
 }

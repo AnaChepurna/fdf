@@ -61,7 +61,7 @@ static int		count_numbers(char *str)
 	return (count);
 }
 
-static t_peak		*get_intarr(char *str, int len, t_map *map)
+static t_peak		*get_intarr(char *str, int len, t_map *map, int y)
 {
 	t_peak	*res;
 	int		i;
@@ -71,9 +71,12 @@ static t_peak		*get_intarr(char *str, int len, t_map *map)
 	{
 		while (i < len)
 		{
+			res[i].y = y;
+			res[i].x = i;
 			while (IS_SPACE(*str))
 				str++;
-			res[i].value = ft_atoi(str);
+			res[i].z = ft_atoi(str);
+			res[i].value = res[i].z;
 			if (*str == '-')
 				str++;
 			while (ft_isdigit(*str))
@@ -107,7 +110,7 @@ t_map			*get_map(char *filename)
 				i = -1;
 				while (lst && ++i < map->y)
 				{
-					map->map[i] = get_intarr((char *)lst->content, map->x, map);
+					map->map[i] = get_intarr((char *)lst->content, map->x, map, i);
 					lst = lst->next;
 				}
 			}
