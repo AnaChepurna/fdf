@@ -21,7 +21,8 @@ FILES = main.c \
 		key.c \
 		draw.c \
 		axises.c \
-		color.c
+		color.c \
+		new.c
 SRC = $(addprefix $(SRC_DIR), $(FILES))
 OBJ = $(SRC:.c=.o)
 LIB = libft/libft.a
