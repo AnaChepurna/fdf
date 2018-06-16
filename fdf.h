@@ -24,8 +24,6 @@ typedef	struct 		s_peak
 	int				x;
 	int				y;
 	int				z;
-	int				real_x;
-	int				real_y;
 	int 			value;
 	int				color;
 }					t_peak;
@@ -36,10 +34,6 @@ typedef struct		s_map
 	int				y;
 	t_peak			**map;
 	int				ratio;
-	int				axis_x;
-	int				axis_y;
-	int				x_frame;
-	int				y_frame;
 	int				colors;
 }					t_map;
 
@@ -48,11 +42,6 @@ typedef struct		s_mlx
 	void			*ptr;
 	void			*win;
 	void			*img;
-	int				y_angle;
-	int				z_angle;
-	int				zoom;
-	int				y_shift;
-	int				x_shift;
 }					t_mlx;
 
 /*
@@ -72,11 +61,6 @@ t_map				*get_map(char *filename);
 int					key_handler(int keycode, void *param);
 
 /*
-**draw.c
-*/
-void				draw(t_mlx *mlx);
-
-/*
 **axises.c
 */
 int					get_ratio(t_map *map);
@@ -89,8 +73,9 @@ void				set_colors(t_map *map);
 int					get_draw_color(t_peak a, t_peak b, int index, int max);
 
 void	rotate_z(t_map *map, double angle);
-void	rotate_y(t_map *map, double angle);
 void	rotate_x(t_map *map, double angle);
+void	shift(t_map *map, int value);
+void	zoom(t_map *map, int value);
 void	render(t_mlx *mlx);
 
 

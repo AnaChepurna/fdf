@@ -37,23 +37,10 @@ static void	clear_map(t_map **map)
 
 void		map_set(t_map *map)
 {
-	int	x;
-	int	y;
-
-	y = -1;
-	printf("%i\n", map->ratio);
-	while (++y < map->y)
-	{
-		x = -1;
-		while (++x < map->x)
-		{
-			map->map[y][x].x *= map->ratio;
-			map->map[y][x].x += (W_X_SIZE - map->x * map->ratio) / 2;
-			map->map[y][x].y *= map->ratio;
-			map->map[y][x].y += (W_Y_SIZE - map->y * map->ratio) / 2;
-			map->map[y][x].z *= VALUE;
-		}
-	}
+	zoom(map, map->ratio);
+	rotate_z(map, -0.3);
+	rotate_x(map, -0.3);
+	shift(map, 100);
 }
 
 t_map		*map_manager(int mode, char *filename)
@@ -64,7 +51,6 @@ t_map		*map_manager(int mode, char *filename)
 	{
 		map = get_map(filename);
 		map->ratio = get_ratio(map);
-		//calculate_coords(map);
 		map_set(map);
 		if (map->colors)
 			set_colors(map);

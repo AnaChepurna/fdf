@@ -20,9 +20,8 @@ FILES = main.c \
 		memory.c \
 		key.c \
 		draw.c \
-		axises.c \
 		color.c \
-		new.c
+		point.c
 SRC = $(addprefix $(SRC_DIR), $(FILES))
 OBJ = $(SRC:.c=.o)
 LIB = libft/libft.a
