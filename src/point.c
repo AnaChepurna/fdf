@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   point.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: achepurn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/27 18:44:46 by achepurn          #+#    #+#             */
+/*   Updated: 2018/06/27 18:44:48 by achepurn         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../fdf.h"
 
 void	rotate_x(t_map *map, double angle)
@@ -48,9 +60,9 @@ void	rotate_z(t_map *map, double angle)
 
 void	zoom(t_map *map, int value)
 {
-	static int n = 0;
-	int		x;
-	int		y;
+	static int	n = 0;
+	int			x;
+	int			y;
 
 	y = -1;
 	while (++y < map->y)
@@ -58,8 +70,8 @@ void	zoom(t_map *map, int value)
 		x = -1;
 		while (++x < map->x)
 		{
-			map->map[y][x].x *= value;//map->ratio * 0.7;
-			map->map[y][x].y *= value;// map->ratio * 0.7;
+			map->map[y][x].x *= value;
+			map->map[y][x].y *= value;
 			if (!n)
 				map->map[y][x].z *= VALUE;
 			else
@@ -80,8 +92,8 @@ void	shift(t_map *map, int value)
 		x = -1;
 		while (++x < map->x)
 		{
-			map->map[y][x].x += value;//map->ratio * 0.7;
-			map->map[y][x].y += value;// map->ratio * 0.7;
+			map->map[y][x].x += value;
+			map->map[y][x].y += value;
 		}
 	}
 }

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   color.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: achepurn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/27 18:43:16 by achepurn          #+#    #+#             */
+/*   Updated: 2018/06/27 18:43:18 by achepurn         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../fdf.h"
 
-static int		get_color(int	value)
+static int		get_color(int value)
 {
 	static int	step = 0xff / COLOR_VAL;
 	int			rgb[3];
@@ -20,7 +32,7 @@ static int		get_color(int	value)
 	else if (value >= 0)
 		rgb[0] = step * value;
 	else if (value >= -1 * COLOR_VAL)
-		rgb[2] = - step * value;
+		rgb[2] = -step * value;
 	else
 	{
 		rgb[2] = 0xff;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: achepurn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/27 18:47:20 by achepurn          #+#    #+#             */
+/*   Updated: 2018/06/27 18:47:21 by achepurn         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FDF_H
 # define FDF_H
 
@@ -6,7 +18,7 @@
 # include <fcntl.h>
 # include "minilibx_macos/mlx.h"
 
-#include <stdio.h>
+# include <stdio.h>
 
 # define PARSE		1
 # define CLEAR		2
@@ -19,12 +31,12 @@
 # define COLOR_VAL	10
 # define ABS(n)		((n) >= 0 ? (n) : -(n))
 
-typedef	struct 		s_peak
+typedef	struct		s_peak
 {
 	int				x;
 	int				y;
 	int				z;
-	int 			value;
+	int				value;
 	int				color;
 }					t_peak;
 
@@ -72,12 +84,10 @@ void				calculate_coords(t_map *map);
 void				set_colors(t_map *map);
 int					get_draw_color(t_peak a, t_peak b, int index, int max);
 
-void	rotate_z(t_map *map, double angle);
-void	rotate_x(t_map *map, double angle);
-void	shift(t_map *map, int value);
-void	zoom(t_map *map, int value);
-void	render(t_mlx *mlx);
-
-
+void				rotate_z(t_map *map, double angle);
+void				rotate_x(t_map *map, double angle);
+void				shift(t_map *map, int value);
+void				zoom(t_map *map, int value);
+void				render(t_mlx *mlx);
 
 #endif

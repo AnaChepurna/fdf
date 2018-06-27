@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   memory.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: achepurn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/27 18:44:33 by achepurn          #+#    #+#             */
+/*   Updated: 2018/06/27 18:44:35 by achepurn         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../fdf.h"
 
 t_map		*new_map(void)
@@ -56,6 +68,6 @@ t_map		*map_manager(int mode, char *filename)
 			set_colors(map);
 	}
 	else if (mode == CLEAR)
-			clear_map(&map);
+		clear_map(&map);
 	return (map);
 }

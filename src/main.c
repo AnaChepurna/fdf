@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: achepurn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/27 18:44:26 by achepurn          #+#    #+#             */
+/*   Updated: 2018/06/27 18:44:28 by achepurn         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../fdf.h"
 
 static void		init_mlx(t_mlx *mlx)
@@ -12,7 +24,6 @@ static void		process(char *filename)
 
 	map_manager(PARSE, filename);
 	init_mlx(&mlx);
-	//draw(&mlx);
 	render(&mlx);
 	mlx_key_hook(mlx.win, key_handler, &mlx);
 	mlx_loop(mlx.ptr);
@@ -24,7 +35,7 @@ int				main(int argc, char *argv[])
 	{
 		ft_putstr("usage : ");
 		ft_putstr(argv[0]);
-		ft_putstr( " filename\n");
+		ft_putstr(" filename\n");
 	}
 	else
 		process(argv[1]);
