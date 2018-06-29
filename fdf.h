@@ -26,7 +26,7 @@
 # define W_NAME		"Fdf"
 # define W_Y_SIZE	1200
 # define W_X_SIZE	1200
-# define W_FRAME	100
+# define W_FRAME	50
 # define VALUE 		10
 # define COLOR_VAL	10
 # define ABS(n)		((n) >= 0 ? (n) : -(n))
@@ -93,5 +93,6 @@ void				zoom(t_map *map, int value);
 void				render(t_mlx *mlx);
 void	shift_y(t_map *map, int value);
 void	shift_x(t_map *map, int value);
+void			error(char *massage);
 
 #endif

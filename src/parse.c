@@ -20,6 +20,8 @@ static t_list		*get_file(char *filename)
 
 	file = NULL;
 	fd = open(filename, O_RDONLY);
+	if (fd == -1)
+		error("Error: file is unavailable\n");
 	while (get_next_line(fd, &str) > 0)
 	{
 		ft_lstaddend(&file, ft_lstnew(str, ft_strlen(str) + 1));
@@ -29,25 +31,24 @@ static t_list		*get_file(char *filename)
 	return (file);
 }
 
-static void			parse_color(char **str, t_peak *peak, t_map *map)
+static int		parse_color(char **str, t_map *map)
 {
+	int ret;
+
 	if (map)
 		map->colors = 0;
 	(*str)++;
 	if (ft_strnequ("0x", *str, 2) || ft_strnequ("0X", *str, 2))
 	{
 		*str += 2;
-		if (peak)
-			peak->color = ft_atoi_base(*str, 16);
+		ret = ft_atoi_base(*str, 16);
 	}
 	else
-	{
-		if (peak)
-			peak->color = ft_atoi_base(*str, 16);
-	}
+		ret = ft_atoi_base(*str, 16);
 	while (ft_isdigit(**str) || (**str >= 'a' && **str <= 'f')
 		|| (**str >= 'A' && **str <= 'F'))
 		(*str)++;
+	return (ret);
 }
 
 static int			count_numbers(char *str)
@@ -65,7 +66,7 @@ static int			count_numbers(char *str)
 			while (ft_isdigit(*str))
 				str++;
 			if (*str == ',')
-				parse_color(&str, NULL, NULL);
+				parse_color(&str, NULL);
 		}
 		if (*str)
 			str++;
@@ -87,17 +88,16 @@ static t_peak		*get_intarr(char *str, int len, t_map *map, int y)
 			res[i].x = i;
 			while (IS_SPACE(*str))
 				str++;
+			if (!*str)
+				error("Error: error in input file\n");
 			res[i].z = ft_atoi(str);
 			res[i].value = res[i].z;
-			if (*str == '-')
+			while (*str == '-' || ft_isdigit(*str))
 				str++;
-			while (ft_isdigit(*str))
-				str++;
-			if (*str == ',')
-				parse_color(&str, &res[i], map);
-			else
-				res[i].color = 0xffffff;
+			res[i].color = *str == ',' ? parse_color(&str, map) : 0xffffff;
 		}
+		if (*str && !IS_SPACE(*str))
+			error("Error: error in input file\n");
 	}
 	return (res);
 }

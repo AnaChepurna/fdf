@@ -53,7 +53,6 @@ void		map_set(t_map *map)
 	rotate_z(map, -0.3);
 	rotate_x(map, -0.3);
 	shift_x(map, W_FRAME);
-	printf("------------- %i\n", map->map[0][0].y);
 	shift_y(map, -map->map[0][map->x - 1].y + W_FRAME);
 }
 
