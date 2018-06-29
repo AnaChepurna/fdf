@@ -14,8 +14,12 @@
 
 static void		init_mlx(t_mlx *mlx)
 {
+	t_map *map;
+	map = map_manager(GET, NULL);
+	mlx->win_x = map->ratio * map->x * 1.3 + W_FRAME * 2;
+	mlx->win_y = map->ratio * map->y * 1.3 + W_FRAME * 2;
 	mlx->ptr = mlx_init();
-	mlx->win = mlx_new_window(mlx->ptr, W_X_SIZE, W_Y_SIZE, W_NAME);
+	mlx->win = mlx_new_window(mlx->ptr, mlx->win_x, mlx->win_y, W_NAME);
 }
 
 static void		process(char *filename)

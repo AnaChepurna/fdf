@@ -54,6 +54,8 @@ typedef struct		s_mlx
 	void			*ptr;
 	void			*win;
 	void			*img;
+	int				win_x;
+	int				win_y;
 }					t_mlx;
 
 /*
@@ -86,8 +88,10 @@ int					get_draw_color(t_peak a, t_peak b, int index, int max);
 
 void				rotate_z(t_map *map, double angle);
 void				rotate_x(t_map *map, double angle);
-void				shift(t_map *map, int value);
+//void				shift(t_map *map, int value);
 void				zoom(t_map *map, int value);
 void				render(t_mlx *mlx);
+void	shift_y(t_map *map, int value);
+void	shift_x(t_map *map, int value);
 
 #endif

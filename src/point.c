@@ -81,7 +81,7 @@ void	zoom(t_map *map, int value)
 	n++;
 }
 
-void	shift(t_map *map, int value)
+void	shift_y(t_map *map, int value)
 {
 	int		x;
 	int		y;
@@ -91,9 +91,20 @@ void	shift(t_map *map, int value)
 	{
 		x = -1;
 		while (++x < map->x)
-		{
-			map->map[y][x].x += value;
 			map->map[y][x].y += value;
-		}
+	}
+}
+
+void	shift_x(t_map *map, int value)
+{
+	int		x;
+	int		y;
+
+	y = -1;
+	while (++y < map->y)
+	{
+		x = -1;
+		while (++x < map->x)
+			map->map[y][x].x += value;
 	}
 }
