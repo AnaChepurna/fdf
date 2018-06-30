@@ -58,7 +58,7 @@ void	rotate_z(t_map *map, double angle)
 	}
 }
 
-void	zoom(t_map *map, int value)
+void	zoom(t_map *map, double value)
 {
 	static int	n = 0;
 	int			x;

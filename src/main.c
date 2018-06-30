@@ -20,7 +20,8 @@ void			error(char *massage)
 
 static void		init_mlx(t_mlx *mlx)
 {
-	t_map *map;
+	t_map	*map;
+
 	map = map_manager(GET, NULL);
 	mlx->win_x = map->map[map->y - 1][map->x - 1].x + W_FRAME;
 	mlx->win_y = map->map[map->y - 1][0].y + W_FRAME;

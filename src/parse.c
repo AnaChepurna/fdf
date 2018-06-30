@@ -31,7 +31,7 @@ static t_list		*get_file(char *filename)
 	return (file);
 }
 
-static int		parse_color(char **str, t_map *map)
+static int			parse_color(char **str, t_map *map)
 {
 	int ret;
 
@@ -80,25 +80,26 @@ static t_peak		*get_intarr(char *str, int len, t_map *map, int y)
 	int		i;
 
 	i = -1;
-	if ((res = (t_peak *)malloc(sizeof(t_peak) * len)))
+	if (!(res = (t_peak *)malloc(sizeof(t_peak) * len)))
+		return (NULL);
+	while (++i < len)
 	{
-		while (++i < len)
-		{
-			res[i].y = y;
-			res[i].x = i;
-			while (IS_SPACE(*str))
-				str++;
-			if (!*str)
-				error("Error: error in input file\n");
-			res[i].z = ft_atoi(str);
-			res[i].value = res[i].z;
-			while (*str == '-' || ft_isdigit(*str))
-				str++;
-			res[i].color = *str == ',' ? parse_color(&str, map) : 0xffffff;
-		}
-		if (*str && !IS_SPACE(*str))
+		res[i].y = y;
+		res[i].x = i;
+		while (IS_SPACE(*str))
+			str++;
+		if (!*str)
 			error("Error: error in input file\n");
+		res[i].z = ft_atoi(str);
+		res[i].value = res[i].z;
+		while (*str == '-' || ft_isdigit(*str))
+			str++;
+		res[i].color = *str == ',' ? parse_color(&str, map) : 0xffffff;
 	}
+	while (IS_SPACE(*str))
+		str++;
+	if (*str)
+		error("Error: error in input file\n");
 	return (res);
 }
 

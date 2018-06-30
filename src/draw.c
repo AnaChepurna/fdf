@@ -17,7 +17,7 @@ int		count_pixels(t_peak *a, t_peak *b)
 	int	x;
 	int	y;
 	int	z;
-	int res;
+	int	res;
 
 	x = a->x;
 	y = a->y;
@@ -51,18 +51,16 @@ void	draw_line(t_mlx *mlx, t_peak *a, t_peak *b)
 	int	index;
 	int	len;
 
-	x = a->x; //+ (W_X_SIZE / 2);
-	y = a->y; //+ + (W_Y_SIZE / 2);
+	x = a->x;
+	y = a->y;
 	if (ABS(a->x - b->x) > ABS(a->y - b->y))
 		z = ABS(a->x - b->x);
 	else
 		z = -ABS(a->y - b->y) / 2;
-	//printf("a = %i-%i, b = %i-%i\n", a->y, a->x, b->y, b->x);
 	index = 0;
 	len = count_pixels(a, b);
 	while (y != b->y || x != b->x)
 	{
-		//printf("%i-%i\n", y, x);
 		mlx_pixel_put(mlx->ptr, mlx->win, x, y, get_draw_color(*a, *b, index, len));
 		if (z > -ABS(a->x - b->x))
 		{
@@ -84,7 +82,6 @@ void	render(t_mlx *mlx)
 	int		x;
 	int		y;
 
-	printf("rendering\n");
 	map = map_manager(GET, NULL);
 	mlx_clear_window(mlx->ptr, mlx->win);
 	y = -1;
@@ -102,9 +99,9 @@ void	render(t_mlx *mlx)
 	}
 }
 
-int			get_ratio(t_map *map)
+int		get_ratio(t_map *map)
 {
-	int len;
+	int	len;
 	int	wlen;
 	int	ratio;
 
@@ -119,6 +116,7 @@ int			get_ratio(t_map *map)
 		wlen = W_Y_SIZE;
 	}
 	ratio = (wlen - (W_FRAME * 2)) / len;
+	if (ratio < 1)
+		ratio = 1;
 	return (ratio);
 }
-
