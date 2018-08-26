@@ -27,7 +27,7 @@
 # define W_Y_SIZE	1200
 # define W_X_SIZE	1200
 # define W_FRAME	50
-# define VALUE 		10
+# define VALUE 		8
 # define COLOR_VAL	10
 # define ABS(n)		((n) >= 0 ? (n) : -(n))
 
@@ -88,11 +88,10 @@ int					get_draw_color(t_peak a, t_peak b, int index, int max);
 
 void				rotate_z(t_map *map, double angle);
 void				rotate_x(t_map *map, double angle);
-//void				shift(t_map *map, int value);
 void				zoom(t_map *map, double value);
 void				render(t_mlx *mlx);
-void	shift_y(t_map *map, int value);
-void	shift_x(t_map *map, int value);
-void			error(char *massage);
+void				shift_y(t_map *map, int value);
+void				shift_x(t_map *map, int value);
+void				error(char *massage);
 
 #endif

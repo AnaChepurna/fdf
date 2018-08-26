@@ -53,9 +53,7 @@ void			set_colors(t_map *map)
 		while (++i < map->x)
 		{
 			map->map[j][i].color = get_color(map->map[j][i].value);
-			printf("%i = %#x; ", map->map[j][i].value, map->map[j][i].color);
 		}
-		printf("\n");
 	}
 }
 

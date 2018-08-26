@@ -14,29 +14,27 @@
 
 int		count_pixels(t_peak *a, t_peak *b)
 {
-	int	x;
-	int	y;
-	int	z;
+	int	cord[3];
 	int	res;
 
-	x = a->x;
-	y = a->y;
+	cord[0] = a->x;
+	cord[1] = a->y;
 	res = 0;
 	if (ABS(a->x - b->x) > ABS(a->y - b->y))
-		z = ABS(a->x - b->x);
+		cord[2] = ABS(a->x - b->x);
 	else
-		z = -ABS(a->y - b->y) / 2;
-	while (y != b->y || x != b->x)
+		cord[2] = -ABS(a->y - b->y) / 2;
+	while (cord[1] != b->y || cord[0] != b->x)
 	{
-		if (z > -ABS(a->x - b->x))
+		if (cord[2] > -ABS(a->x - b->x))
 		{
-			z -= ABS(a->y - b->y);
-			x += a->x < b->x ? 1 : -1;
+			cord[2] -= ABS(a->y - b->y);
+			cord[0] += a->x < b->x ? 1 : -1;
 		}
-		if (z < ABS(a->y - b->y))
+		if (cord[2] < ABS(a->y - b->y))
 		{
-			z += ABS(a->x - b->x);
-			y += a->y < b->y ? 1 : -1;
+			cord[2] += ABS(a->x - b->x);
+			cord[1] += a->y < b->y ? 1 : -1;
 		}
 		res++;
 	}
@@ -45,34 +43,30 @@ int		count_pixels(t_peak *a, t_peak *b)
 
 void	draw_line(t_mlx *mlx, t_peak *a, t_peak *b)
 {
-	int	x;
-	int	y;
-	int	z;
-	int	index;
-	int	len;
+	int	c[5];
 
-	x = a->x;
-	y = a->y;
+	c[0] = a->x;
+	c[1] = a->y;
 	if (ABS(a->x - b->x) > ABS(a->y - b->y))
-		z = ABS(a->x - b->x);
+		c[2] = ABS(a->x - b->x);
 	else
-		z = -ABS(a->y - b->y) / 2;
-	index = 0;
-	len = count_pixels(a, b);
-	while (y != b->y || x != b->x)
+		c[2] = -ABS(a->y - b->y) / 2;
+	c[3] = 0;
+	c[4] = count_pixels(a, b);
+	while (c[1] != b->y || c[0] != b->x)
 	{
-		mlx_pixel_put(mlx->ptr, mlx->win, x, y, get_draw_color(*a, *b, index, len));
-		if (z > -ABS(a->x - b->x))
+		mlx_pixel_put(mlx->ptr, mlx->win, c[0], c[1],
+			get_draw_color(*a, *b, c[3]++, c[4]));
+		if (c[2] > -ABS(a->x - b->x))
 		{
-			z -= ABS(a->y - b->y);
-			x += a->x < b->x ? 1 : -1;
+			c[2] -= ABS(a->y - b->y);
+			c[0] += a->x < b->x ? 1 : -1;
 		}
-		if (z < ABS(a->y - b->y))
+		if (c[2] < ABS(a->y - b->y))
 		{
-			z += ABS(a->x - b->x);
-			y += a->y < b->y ? 1 : -1;
+			c[2] += ABS(a->x - b->x);
+			c[1] += a->y < b->y ? 1 : -1;
 		}
-		index++;
 	}
 }
 
@@ -94,7 +88,8 @@ void	render(t_mlx *mlx)
 				draw_line(mlx, &map->map[y][x], &map->map[y][x + 1]);
 			if (y + 1 < map->y)
 				draw_line(mlx, &map->map[y][x], &map->map[y + 1][x]);
-			mlx_pixel_put(mlx->ptr, mlx->win, map->map[y][x].x, map->map[y][x].y, map->map[y][x].color);
+			mlx_pixel_put(mlx->ptr, mlx->win, map->map[y][x].x,
+				map->map[y][x].y, map->map[y][x].color);
 		}
 	}
 }
@@ -115,7 +110,7 @@ int		get_ratio(t_map *map)
 		len = map->y;
 		wlen = W_Y_SIZE;
 	}
-	ratio = (wlen - (W_FRAME * 2)) / len;
+	ratio = (wlen - W_FRAME * 2) / len;
 	if (ratio < 1)
 		ratio = 1;
 	return (ratio);

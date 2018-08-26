@@ -47,13 +47,36 @@ static void	clear_map(t_map **map)
 	}
 }
 
+static int	get_highest(t_map *map)
+{
+	int		res;
+	int		i;
+	int		j;
+
+	res = 0;
+	i = -1;
+	while (++i < map->x)
+	{
+		j = -1;
+		while (++j < map->y)
+		{
+			if (map->map[j][i].y < res)
+				res = map->map[j][i].y;
+			printf("%i ", map->map[j][i].y);
+		}
+		printf("\n");
+	}
+	ft_putnbr(res);
+	return (-res);
+}
+
 void		map_set(t_map *map)
 {
 	zoom(map, map->ratio);
-	rotate_z(map, -0.3);
-	rotate_x(map, -0.3);
+	rotate_z(map, -0.6);
+	rotate_x(map, -0.6);
 	shift_x(map, W_FRAME);
-	shift_y(map, -map->map[0][map->x - 1].y + W_FRAME);
+	shift_y(map, get_highest(map) + W_FRAME);
 }
 
 t_map		*map_manager(int mode, char *filename)
